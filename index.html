@@ -549,7 +549,7 @@
             </div>
 
             <div class="card" style="margin-top: 30px;">
-                <button class="btn" onclick="downloadPDF()">📥 Descargar Contrato PDF</button>
+                <button class="btn" onclick="downloadImage()">📥 Descargar Contrato JPG</button>
                 <button class="btn btn-secondary" onclick="location.reload()">🔄 Crear nuevo contrato</button>
             </div>
         </div>
@@ -666,51 +666,36 @@
             nextScreen(4);
         }
 
-        function downloadPDF() {
+        function downloadImage() {
             const element = document.getElementById('contract-content');
             
-            // Forzar estilos temporales para el PDF
-            const originalStyle = element.getAttribute('style') || '';
-            element.setAttribute('style', 'width: 170mm !important; margin: 0 auto !important; padding: 15mm !important; position: relative !important; left: 0 !important;');
-            
-            const opt = {
-                margin: 0,
-                filename: `Contrato_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
-                image: { 
-                    type: 'jpeg', 
-                    quality: 0.98 
-                },
-                html2canvas: { 
-                    scale: 2,
-                    useCORS: true,
-                    allowTaint: true,
-                    scrollY: 0,
-                    scrollX: 0,
-                    x: 0,
-                    y: 0,
-                    width: 642,
-                    windowWidth: 642
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'portrait'
-                }
-            };
-
             const btn = event.target;
             const originalText = btn.textContent;
-            btn.textContent = 'Generando PDF...';
+            btn.textContent = 'Generando imagen...';
             btn.disabled = true;
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.setAttribute('style', originalStyle);
+            
+            // Usar html2canvas directamente para generar imagen
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight
+            }).then(canvas => {
+                // Convertir a JPG y descargar
+                const link = document.createElement('a');
+                link.download = `Contrato_Pololeo_${formData.name1}_${formData.name2}.jpg`.replace(/\s+/g, '_');
+                link.href = canvas.toDataURL('image/jpeg', 0.95);
+                link.click();
+                
                 btn.textContent = originalText;
                 btn.disabled = false;
             }).catch(err => {
-                element.setAttribute('style', originalStyle);
                 console.error(err);
-                alert('Error generando PDF. Intenta de nuevo.');
+                alert('Error generando imagen. Intenta de nuevo.');
                 btn.textContent = originalText;
                 btn.disabled = false;
             });
