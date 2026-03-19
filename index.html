@@ -158,9 +158,9 @@
         #contract-content {
             background: white;
             border: 2px solid #333;
-            padding: 30px 40px;
-            width: 210mm;
-            min-height: 297mm;
+            padding: 25px 30px;
+            width: 190mm;
+            min-height: 277mm;
             margin: 0 auto;
             box-sizing: border-box;
             font-family: 'Times New Roman', Times, serif;
@@ -327,9 +327,9 @@
                 padding: 0 !important;
             }
             #contract-content {
-                width: 210mm !important;
-                min-height: 297mm !important;
-                margin: 0 !important;
+                width: 190mm !important;
+                min-height: 277mm !important;
+                margin: 0 auto !important;
                 border: 2px solid #333 !important;
                 page-break-after: avoid;
             }
@@ -653,7 +653,7 @@
             const element = document.getElementById('contract-content');
             
             const opt = {
-                margin: [10, 10, 10, 10],
+                margin: [8, 8, 8, 8],
                 filename: `Contrato_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
                 image: { 
                     type: 'jpeg', 
@@ -664,7 +664,9 @@
                     useCORS: true,
                     allowTaint: true,
                     scrollY: 0,
-                    scrollX: 0
+                    scrollX: 0,
+                    width: 190 * 3.78,
+                    windowWidth: 190 * 3.78
                 },
                 jsPDF: { 
                     unit: 'mm', 
