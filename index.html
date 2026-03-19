@@ -666,39 +666,47 @@
             nextScreen(4);
         }
 
-        function downloadImage() {
+        async function downloadImage() {
             const element = document.getElementById('contract-content');
-            
             const btn = event.target;
             const originalText = btn.textContent;
+            
             btn.textContent = 'Generando imagen...';
             btn.disabled = true;
             
-            // Usar html2canvas directamente para generar imagen
-            html2canvas(element, {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#ffffff',
-                scrollX: 0,
-                scrollY: 0,
-                windowWidth: element.scrollWidth,
-                windowHeight: element.scrollHeight
-            }).then(canvas => {
-                // Convertir a JPG y descargar
+            try {
+                // Esperar un momento para que el UI se actualice
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                // Crear canvas
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    scrollX: -window.scrollX,
+                    scrollY: -window.scrollY,
+                    x: 0,
+                    y: 0,
+                    width: element.offsetWidth,
+                    height: element.offsetHeight
+                });
+                
+                // Descargar imagen
                 const link = document.createElement('a');
                 link.download = `Contrato_Pololeo_${formData.name1}_${formData.name2}.jpg`.replace(/\s+/g, '_');
                 link.href = canvas.toDataURL('image/jpeg', 0.95);
+                document.body.appendChild(link);
                 link.click();
+                document.body.removeChild(link);
                 
+            } catch (err) {
+                console.error('Error:', err);
+                alert('Error generando imagen: ' + err.message);
+            } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
-            }).catch(err => {
-                console.error(err);
-                alert('Error generando imagen. Intenta de nuevo.');
-                btn.textContent = originalText;
-                btn.disabled = false;
-            });
+            }
         }
 
         window.addEventListener('beforeunload', () => {
