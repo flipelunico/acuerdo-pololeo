@@ -154,93 +154,114 @@
 
         .hidden { display: none !important; }
 
-        /* Certificado para PDF - OPTIMIZADO PARA UNA PÁGINA */
+        /* CERTIFICADO HORIZONTAL OPTIMIZADO */
         #certificate-content {
             background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
             border: 3px solid #d4af37;
             border-radius: 15px;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
-            width: 210mm;
-            min-height: 297mm;
+            width: 297mm; /* Ancho A4 horizontal */
+            height: 210mm; /* Alto A4 horizontal */
             margin: 0 auto;
             box-sizing: border-box;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            overflow: hidden;
             page-break-inside: avoid;
         }
 
+        .cert-left {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .cert-right {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border-left: 2px solid #d4af37;
+            padding-left: 20px;
+        }
+
         .cert-header {
-            font-size: 22px;
+            font-size: 26px;
             color: #d4af37;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             border-bottom: 2px solid #d4af37;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
         .cert-subtitle {
             color: #666;
             font-size: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .cert-intro {
             color: #666;
             font-size: 13px;
-            margin-bottom: 10px;
+            margin: 8px 0;
         }
 
         .cert-names {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: #764ba2;
             margin: 10px 0;
-        }
-
-        .cert-divider {
-            font-size: 24px;
-            margin: 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .cert-terms-label {
             color: #764ba2;
             font-weight: 600;
-            font-size: 13px;
-            margin: 15px 0 8px 0;
+            font-size: 12px;
+            margin: 10px 0 5px 0;
         }
 
         .cert-terms {
             background: #f9f9f9;
             border-left: 3px solid #764ba2;
-            padding: 12px 15px;
-            margin: 8px 0;
+            padding: 10px 12px;
+            margin: 5px 0;
             text-align: left;
             font-style: italic;
-            line-height: 1.4;
-            font-size: 12px;
-            max-height: 100px;
+            line-height: 1.3;
+            font-size: 11px;
+            max-height: 80px;
             overflow-y: auto;
         }
 
         .cert-photo-container {
-            margin: 15px 0;
-            padding: 10px;
+            padding: 15px;
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 2px dashed #764ba2;
+            margin: 10px 0;
         }
 
         .cert-photo {
-            max-width: 200px;
-            max-height: 150px;
+            max-width: 220px;
+            max-height: 160px;
             object-fit: contain;
             border-radius: 8px;
         }
 
         .cert-photo-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #666;
             margin-top: 8px;
         }
@@ -248,23 +269,23 @@
         .cert-quote {
             font-style: italic;
             color: #555;
-            margin: 15px 0;
+            margin: 12px 0;
             font-size: 13px;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .cert-date {
             color: #764ba2;
             font-weight: 600;
-            margin-top: 15px;
-            font-size: 14px;
+            margin-top: 10px;
+            font-size: 13px;
         }
 
         .cert-footer {
-            margin-top: 15px;
-            padding-top: 10px;
+            margin-top: 10px;
+            padding-top: 8px;
             border-top: 1px solid #d4af37;
-            font-size: 10px;
+            font-size: 9px;
             color: #999;
         }
 
@@ -275,33 +296,42 @@
             .card { padding: 20px; }
             
             #certificate-content {
-                padding: 20px;
+                flex-direction: column;
+                width: 100%;
+                height: auto;
+                padding: 15px;
+            }
+            .cert-right {
+                border-left: none;
+                border-top: 2px solid #d4af37;
+                padding-left: 0;
+                padding-top: 15px;
                 width: 100%;
             }
-            .cert-header { font-size: 18px; }
-            .cert-names { font-size: 16px; }
-            .cert-photo { max-width: 150px; max-height: 120px; }
+            .cert-left {
+                width: 100%;
+            }
+            .cert-header { font-size: 20px; }
+            .cert-names { font-size: 18px; flex-direction: column; }
         }
 
-        /* Estilos de impresión */
         @media print {
             body { 
                 background: white !important; 
                 padding: 0 !important;
             }
-            .container { 
-                max-width: 100% !important; 
-                margin: 0 !important;
-            }
             #certificate-content {
-                width: 210mm !important;
-                min-height: 297mm !important;
+                width: 297mm !important;
+                height: 210mm !important;
                 margin: 0 !important;
-                border: 3px solid #d4af37 !important;
                 page-break-after: avoid;
+                flex-direction: row !important;
             }
-            .btn, .card:not(#certificate-content) { 
-                display: none !important; 
+            .cert-right {
+                border-top: none !important;
+                border-left: 2px solid #d4af37 !important;
+                padding-top: 0 !important;
+                padding-left: 20px !important;
             }
         }
     </style>
@@ -374,10 +404,11 @@
             </button>
         </div>
 
-        <!-- Pantalla 4: Certificado -->
+        <!-- Pantalla 4: Certificado Horizontal -->
         <div class="screen" id="screen-4">
             <div id="certificate-content">
-                <div>
+                <!-- Lado Izquierdo: Texto -->
+                <div class="cert-left">
                     <div class="cert-header">🏆 CERTIFICADO DE POLOLEO</div>
                     <div class="cert-subtitle">Documento Oficial de Compromiso</div>
                     
@@ -385,7 +416,7 @@
                     
                     <div class="cert-names">
                         <span id="certName1">Persona 1</span>
-                        <span class="cert-divider">💕</span>
+                        <span>💕</span>
                         <span id="certName2">Persona 2</span>
                     </div>
                     
@@ -395,24 +426,30 @@
                         Condiciones del acuerdo...
                     </div>
 
-                    <div class="cert-photo-container">
-                        <img id="certPhoto" class="cert-photo" src="" alt="Foto de firma">
-                        <div class="cert-photo-label">
-                            📸 Firma biométrica: <span id="certDatePhoto"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
                     <div class="cert-quote">
-                        "El amor no se mira, se siente, y aún más cuando estás<br>
-                        al lado de la persona que amas."
+                        "El amor no se mira, se siente."
                     </div>
 
                     <div class="cert-date" id="certDate"></div>
 
                     <div class="cert-footer">
-                        Este certificado fue generado digitalmente y tiene validez emocional indefinida 💕
+                        Certificado digital con validez emocional indefinida 💕
+                    </div>
+                </div>
+
+                <!-- Lado Derecho: Foto -->
+                <div class="cert-right">
+                    <div style="font-size: 16px; color: #764ba2; font-weight: 600; margin-bottom: 15px;">
+                        📸 FIRMA DIGITAL
+                    </div>
+                    
+                    <div class="cert-photo-container">
+                        <img id="certPhoto" class="cert-photo" src="" alt="Foto de firma">
+                    </div>
+                    
+                    <div class="cert-photo-label">
+                        Captura realizada el<br>
+                        <span id="certDatePhoto"></span>
                     </div>
                 </div>
             </div>
@@ -425,7 +462,6 @@
     </div>
 
     <script>
-        // Datos del formulario
         let formData = {
             name1: '',
             name2: '',
@@ -434,23 +470,19 @@
             date: null
         };
 
-        // Navegación
         function nextScreen(n) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(`screen-${n}`).classList.add('active');
         }
 
-        // Guardar datos
         function saveData() {
             formData.name1 = document.getElementById('name1').value || 'Persona 1';
             formData.name2 = document.getElementById('name2').value || 'Persona 2';
             formData.terms = document.getElementById('terms').value || 'Sin condiciones específicas';
-            
             nextScreen(3);
             initCamera();
         }
 
-        // Cámara
         let videoStream = null;
 
         async function initCamera() {
@@ -478,7 +510,6 @@
             formData.date = new Date();
 
             preview.src = formData.photo;
-            
             video.classList.add('hidden');
             preview.classList.remove('hidden');
             document.getElementById('captureBtn').classList.add('hidden');
@@ -499,51 +530,46 @@
             initCamera();
         }
 
-        // Mostrar certificado
         function showCertificate() {
             document.getElementById('certName1').textContent = formData.name1;
             document.getElementById('certName2').textContent = formData.name2;
             document.getElementById('certTerms').textContent = formData.terms;
             document.getElementById('certPhoto').src = formData.photo;
-            document.getElementById('certDate').textContent = 'Fecha: ' + formData.date.toLocaleDateString('es-ES', {
+            document.getElementById('certDate').textContent = formData.date.toLocaleDateString('es-ES', {
                 year: 'numeric', month: 'long', day: 'numeric'
             });
             document.getElementById('certDatePhoto').textContent = formData.date.toLocaleString('es-ES');
-
             nextScreen(4);
         }
 
-        // Descargar PDF - OPTIMIZADO PARA UNA PÁGINA
+        // PDF HORIZONTAL
         function downloadPDF() {
             const element = document.getElementById('certificate-content');
             
             const opt = {
-                margin: [5, 5, 5, 5], // Márgenes mínimos
+                margin: [5, 5, 5, 5],
                 filename: `Acuerdo_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
                 image: { 
                     type: 'jpeg', 
-                    quality: 0.95 
+                    quality: 0.98 
                 },
                 html2canvas: { 
                     scale: 2,
                     useCORS: true,
                     allowTaint: true,
                     scrollY: 0,
-                    scrollX: 0
+                    scrollX: 0,
+                    windowWidth: 297 * 3.78, // 297mm en px aprox
+                    windowHeight: 210 * 3.78
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'portrait',
-                    putOnlyUsedFonts: true,
-                    floatPrecision: 16
-                },
-                pagebreak: { 
-                    mode: ['avoid-all', 'css', 'legacy'] // Evitar saltos de página
+                    orientation: 'landscape', // <-- HORIZONTAL
+                    putOnlyUsedFonts: true
                 }
             };
 
-            // Mostrar mensaje de carga
             const btn = event.target;
             const originalText = btn.textContent;
             btn.textContent = 'Generando PDF...';
@@ -560,7 +586,6 @@
             });
         }
 
-        // Guardar en localStorage
         window.addEventListener('beforeunload', () => {
             if (formData.photo) {
                 localStorage.setItem('acuerdoPololeo', JSON.stringify(formData));
