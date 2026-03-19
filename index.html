@@ -154,103 +154,155 @@
 
         .hidden { display: none !important; }
 
-        /* Certificado para PDF */
+        /* Certificado para PDF - OPTIMIZADO PARA UNA PÁGINA */
         #certificate-content {
             background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
-            border: 4px solid #d4af37;
-            border-radius: 20px;
-            padding: 40px;
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            padding: 25px;
             text-align: center;
-            max-width: 600px;
+            width: 210mm;
+            min-height: 297mm;
             margin: 0 auto;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            page-break-inside: avoid;
         }
 
         .cert-header {
-            font-size: 28px;
+            font-size: 22px;
             color: #d4af37;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             border-bottom: 2px solid #d4af37;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
 
         .cert-subtitle {
             color: #666;
-            font-size: 14px;
-            margin-bottom: 30px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .cert-intro {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
         .cert-names {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             color: #764ba2;
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
         .cert-divider {
-            font-size: 30px;
-            margin: 0 10px;
+            font-size: 24px;
+            margin: 0 8px;
+        }
+
+        .cert-terms-label {
+            color: #764ba2;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 15px 0 8px 0;
         }
 
         .cert-terms {
             background: #f9f9f9;
-            border-left: 4px solid #764ba2;
-            padding: 20px;
-            margin: 25px 0;
+            border-left: 3px solid #764ba2;
+            padding: 12px 15px;
+            margin: 8px 0;
             text-align: left;
             font-style: italic;
-            line-height: 1.6;
+            line-height: 1.4;
+            font-size: 12px;
+            max-height: 100px;
+            overflow-y: auto;
         }
 
         .cert-photo-container {
-            margin: 25px 0;
-            padding: 15px;
+            margin: 15px 0;
+            padding: 10px;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             border: 2px dashed #764ba2;
         }
 
         .cert-photo {
-            max-width: 300px;
-            max-height: 300px;
+            max-width: 200px;
+            max-height: 150px;
             object-fit: contain;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         .cert-photo-label {
-            font-size: 12px;
+            font-size: 10px;
             color: #666;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .cert-quote {
             font-style: italic;
             color: #555;
-            margin: 25px 0;
-            font-size: 16px;
+            margin: 15px 0;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .cert-date {
             color: #764ba2;
             font-weight: 600;
-            margin-top: 30px;
-            font-size: 16px;
+            margin-top: 15px;
+            font-size: 14px;
         }
 
         .cert-footer {
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 15px;
+            padding-top: 10px;
             border-top: 1px solid #d4af37;
-            font-size: 12px;
+            font-size: 10px;
             color: #999;
         }
 
+        /* Ajustes para móviles */
         @media (max-width: 480px) {
             body { padding: 15px; }
             h1 { font-size: 22px; }
             .card { padding: 20px; }
-            .cert-header { font-size: 22px; }
-            .cert-names { font-size: 18px; }
+            
+            #certificate-content {
+                padding: 20px;
+                width: 100%;
+            }
+            .cert-header { font-size: 18px; }
+            .cert-names { font-size: 16px; }
+            .cert-photo { max-width: 150px; max-height: 120px; }
+        }
+
+        /* Estilos de impresión */
+        @media print {
+            body { 
+                background: white !important; 
+                padding: 0 !important;
+            }
+            .container { 
+                max-width: 100% !important; 
+                margin: 0 !important;
+            }
+            #certificate-content {
+                width: 210mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                border: 3px solid #d4af37 !important;
+                page-break-after: avoid;
+            }
+            .btn, .card:not(#certificate-content) { 
+                display: none !important; 
+            }
         }
     </style>
 </head>
@@ -265,7 +317,9 @@
             <div class="card">
                 <div class="card-title">👋 Bienvenidos</div>
                 <p>Este es un acuerdo entre dos personas que deciden iniciar una relación de pololeo.</p>
-                <p style="margin-top: 15px; color: #666; font-size: 14px;">📸 La firma se realiza con una foto juntos como prueba del momento.</p>
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                    📸 La firma se realiza con una foto juntos como prueba del momento.
+                </p>
             </div>
 
             <button class="btn" onclick="nextScreen(2)">Comenzar ✨</button>
@@ -323,40 +377,43 @@
         <!-- Pantalla 4: Certificado -->
         <div class="screen" id="screen-4">
             <div id="certificate-content">
-                <div class="cert-header">🏆 CERTIFICADO DE POLOLEO</div>
-                <div class="cert-subtitle">Documento Oficial de Compromiso</div>
-                
-                <p style="color: #666;">Se certifica que</p>
-                
-                <div class="cert-names">
-                    <span id="certName1">Persona 1</span>
-                    <span class="cert-divider">💕</span>
-                    <span id="certName2">Persona 2</span>
-                </div>
-                
-                <p style="color: #666;">han acordado iniciar una relación de pololeo<br>con las siguientes condiciones:</p>
-                
-                <div class="cert-terms" id="certTerms">
-                    Condiciones del acuerdo...
-                </div>
+                <div>
+                    <div class="cert-header">🏆 CERTIFICADO DE POLOLEO</div>
+                    <div class="cert-subtitle">Documento Oficial de Compromiso</div>
+                    
+                    <div class="cert-intro">Se certifica que</div>
+                    
+                    <div class="cert-names">
+                        <span id="certName1">Persona 1</span>
+                        <span class="cert-divider">💕</span>
+                        <span id="certName2">Persona 2</span>
+                    </div>
+                    
+                    <div class="cert-intro">han acordado iniciar una relación de pololeo con las siguientes condiciones:</div>
+                    
+                    <div class="cert-terms" id="certTerms">
+                        Condiciones del acuerdo...
+                    </div>
 
-                <div class="cert-photo-container">
-                    <img id="certPhoto" class="cert-photo" src="" alt="Foto de firma">
-                    <div class="cert-photo-label">
-                        📸 Firma biométrica: Captura realizada el <span id="certDatePhoto"></span>
+                    <div class="cert-photo-container">
+                        <img id="certPhoto" class="cert-photo" src="" alt="Foto de firma">
+                        <div class="cert-photo-label">
+                            📸 Firma biométrica: <span id="certDatePhoto"></span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="cert-quote">
-                    "El amor no se mira, se siente, y aún más cuando estás<br>
-                    al lado de la persona que amas."
-                </div>
+                <div>
+                    <div class="cert-quote">
+                        "El amor no se mira, se siente, y aún más cuando estás<br>
+                        al lado de la persona que amas."
+                    </div>
 
-                <div class="cert-date" id="certDate"></div>
+                    <div class="cert-date" id="certDate"></div>
 
-                <div class="cert-footer">
-                    Este certificado fue generado digitalmente<br>
-                    y tiene validez emocional indefinida 💕
+                    <div class="cert-footer">
+                        Este certificado fue generado digitalmente y tiene validez emocional indefinida 💕
+                    </div>
                 </div>
             </div>
 
@@ -456,23 +513,33 @@
             nextScreen(4);
         }
 
-        // Descargar PDF
+        // Descargar PDF - OPTIMIZADO PARA UNA PÁGINA
         function downloadPDF() {
             const element = document.getElementById('certificate-content');
             
             const opt = {
-                margin: [10, 10, 10, 10],
+                margin: [5, 5, 5, 5], // Márgenes mínimos
                 filename: `Acuerdo_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
-                image: { type: 'jpeg', quality: 0.95 },
+                image: { 
+                    type: 'jpeg', 
+                    quality: 0.95 
+                },
                 html2canvas: { 
                     scale: 2,
                     useCORS: true,
-                    allowTaint: true
+                    allowTaint: true,
+                    scrollY: 0,
+                    scrollX: 0
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'portrait'
+                    orientation: 'portrait',
+                    putOnlyUsedFonts: true,
+                    floatPrecision: 16
+                },
+                pagebreak: { 
+                    mode: ['avoid-all', 'css', 'legacy'] // Evitar saltos de página
                 }
             };
 
