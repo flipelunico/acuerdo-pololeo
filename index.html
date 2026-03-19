@@ -158,16 +158,18 @@
         #contract-content {
             background: white;
             border: 2px solid #333;
-            padding: 25px 30px;
-            width: 190mm;
-            min-height: 277mm;
+            padding: 20px 25px;
+            width: 100%;
+            max-width: 180mm;
+            min-height: 250mm;
             margin: 0 auto;
             box-sizing: border-box;
             font-family: 'Times New Roman', Times, serif;
             color: #000;
             text-align: justify;
-            line-height: 1.6;
-            page-break-inside: avoid;
+            line-height: 1.5;
+            overflow: hidden;
+            word-wrap: break-word;
         }
 
         .contract-header {
@@ -325,13 +327,26 @@
             body { 
                 background: white !important; 
                 padding: 0 !important;
+                margin: 0 !important;
+            }
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             #contract-content {
-                width: 190mm !important;
-                min-height: 277mm !important;
-                margin: 0 auto !important;
+                width: 170mm !important;
+                max-width: 170mm !important;
+                min-height: 250mm !important;
+                margin: 10mm auto !important;
+                padding: 15mm 20mm !important;
                 border: 2px solid #333 !important;
                 page-break-after: avoid;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+            }
+            .btn, .card:not(#contract-content) { 
+                display: none !important; 
             }
         }
     </style>
@@ -652,8 +667,12 @@
         function downloadPDF() {
             const element = document.getElementById('contract-content');
             
+            // Forzar estilos temporales para el PDF
+            const originalWidth = element.style.width;
+            element.style.width = '170mm';
+            
             const opt = {
-                margin: [8, 8, 8, 8],
+                margin: [5, 5, 5, 5],
                 filename: `Contrato_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
                 image: { 
                     type: 'jpeg', 
@@ -665,8 +684,7 @@
                     allowTaint: true,
                     scrollY: 0,
                     scrollX: 0,
-                    width: 190 * 3.78,
-                    windowWidth: 190 * 3.78
+                    width: 642 // 170mm en px aprox
                 },
                 jsPDF: { 
                     unit: 'mm', 
@@ -681,9 +699,11 @@
             btn.disabled = true;
 
             html2pdf().set(opt).from(element).save().then(() => {
+                element.style.width = originalWidth;
                 btn.textContent = originalText;
                 btn.disabled = false;
             }).catch(err => {
+                element.style.width = originalWidth;
                 console.error(err);
                 alert('Error generando PDF. Intenta de nuevo.');
                 btn.textContent = originalText;
