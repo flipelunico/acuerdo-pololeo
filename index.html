@@ -28,14 +28,14 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
-            height: calc(var(--vh, 1vh) * 100);
+            top: -50px;
+            left: -50px;
+            right: -50px;
+            bottom: -50px;
+            width: calc(100vw + 100px);
+            height: calc(100vh + 100px);
+            height: calc(100dvh + 100px);
+            height: calc(100svh + 100px);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             z-index: -1;
         }
