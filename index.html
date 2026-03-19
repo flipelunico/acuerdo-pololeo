@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Acuerdo de Pololeo 💕</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,28 +17,22 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
             color: #333;
+            padding: 20px;
         }
 
         .container {
             max-width: 480px;
             margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .screen {
             display: none;
-            flex: 1;
-            flex-direction: column;
             animation: fadeIn 0.5s ease;
         }
 
         .screen.active {
-            display: flex;
+            display: block;
         }
 
         @keyframes fadeIn {
@@ -46,9 +41,9 @@
         }
 
         .heart {
-            font-size: 80px;
+            font-size: 60px;
             text-align: center;
-            margin: 20px 0;
+            margin: 10px 0;
             animation: heartbeat 1.5s ease-in-out infinite;
         }
 
@@ -60,7 +55,7 @@
         h1 {
             color: white;
             text-align: center;
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
@@ -68,25 +63,26 @@
         .subtitle {
             color: rgba(255,255,255,0.9);
             text-align: center;
-            font-size: 16px;
-            margin-bottom: 30px;
+            font-size: 15px;
+            margin-bottom: 25px;
         }
 
         .card {
             background: white;
             border-radius: 20px;
             padding: 25px;
-            margin: 10px 0;
+            margin: 15px 0;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
         .card-title {
-            font-size: 20px;
+            font-size: 18px;
             color: #764ba2;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 600;
         }
 
         input[type="text"], textarea {
@@ -97,16 +93,16 @@
             font-size: 16px;
             font-family: inherit;
             transition: border-color 0.3s;
-            resize: vertical;
         }
 
-        input[type="text"]:focus, textarea:focus {
+        input:focus, textarea:focus {
             outline: none;
             border-color: #764ba2;
         }
 
         textarea {
-            min-height: 120px;
+            min-height: 100px;
+            resize: vertical;
         }
 
         .btn {
@@ -120,7 +116,7 @@
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
@@ -129,7 +125,7 @@
         }
 
         .btn:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
@@ -137,188 +133,124 @@
             background: #f0f0f0;
             color: #333;
             box-shadow: none;
-        }
-
-        .signature-pad {
-            border: 2px dashed #764ba2;
-            border-radius: 12px;
-            background: #fafafa;
-            cursor: crosshair;
-            touch-action: none;
-        }
-
-        .pin-pad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .pin-btn {
-            aspect-ratio: 1;
-            border: none;
-            background: #f0f0f0;
-            border-radius: 50%;
-            font-size: 24px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .pin-btn:active {
-            background: #764ba2;
-            color: white;
-            transform: scale(0.95);
-        }
-
-        .pin-display {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .pin-dot {
-            width: 20px;
-            height: 20px;
-            border: 3px solid #764ba2;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .pin-dot.filled {
-            background: #764ba2;
-        }
-
-        .shake {
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .option-card {
-            background: white;
-            border: 2px solid transparent;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 10px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .option-card:hover, .option-card.selected {
-            border-color: #764ba2;
-            background: #f8f5ff;
-        }
-
-        .option-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .option-title {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .option-desc {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .certificate {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
-            border: 3px solid #d4af37;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .certificate::before {
-            content: '🏆';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 100px;
-            opacity: 0.1;
-        }
-
-        .certificate h2 {
-            color: #d4af37;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .certificate-text {
-            font-style: italic;
-            color: #555;
-            line-height: 1.6;
-            margin: 20px 0;
-        }
-
-        .date {
-            color: #764ba2;
-            font-weight: 600;
-            margin-top: 20px;
-        }
-
-        .photo-preview {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin: 15px 0;
+            margin-top: 10px;
         }
 
         .video-preview {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 15px;
             margin: 15px 0;
+            background: #f0f0f0;
         }
 
-        .progress-bar {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 20px 0;
-        }
-
-        .progress-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-        }
-
-        .progress-dot.active {
-            background: white;
+        .photo-preview {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 3px solid #764ba2;
         }
 
         .hidden { display: none !important; }
 
-        .terms-box {
-            background: #f8f8f8;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            max-height: 200px;
-            overflow-y: auto;
-            font-size: 14px;
-            line-height: 1.5;
+        /* Certificado para PDF */
+        #certificate-content {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            border: 4px solid #d4af37;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        @media (max-width: 380px) {
-            h1 { font-size: 24px; }
+        .cert-header {
+            font-size: 28px;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 15px;
+        }
+
+        .cert-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .cert-names {
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        .cert-divider {
+            font-size: 30px;
+            margin: 0 10px;
+        }
+
+        .cert-terms {
+            background: #f9f9f9;
+            border-left: 4px solid #764ba2;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .cert-photo-container {
+            margin: 25px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            border: 2px dashed #764ba2;
+        }
+
+        .cert-photo {
+            max-width: 300px;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .cert-photo-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .cert-quote {
+            font-style: italic;
+            color: #555;
+            margin: 25px 0;
+            font-size: 16px;
+        }
+
+        .cert-date {
+            color: #764ba2;
+            font-weight: 600;
+            margin-top: 30px;
+            font-size: 16px;
+        }
+
+        .cert-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #d4af37;
+            font-size: 12px;
+            color: #999;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 15px; }
+            h1 { font-size: 22px; }
             .card { padding: 20px; }
-            .heart { font-size: 60px; }
+            .cert-header { font-size: 22px; }
+            .cert-names { font-size: 18px; }
         }
     </style>
 </head>
@@ -328,25 +260,18 @@
         <div class="screen active" id="screen-1">
             <div class="heart">💕</div>
             <h1>Acuerdo de Pololeo</h1>
-            <p class="subtitle">Un contrato virtual para nuestra relación</p>
+            <p class="subtitle">Un compromiso especial con foto de prueba</p>
             
             <div class="card">
-                <div class="card-title">👋 Hola</div>
-                <p>Este es un acuerdo especial entre tú y yo. Aquí podemos establecer nuestras reglas, condiciones y promesas.</p>
-                <p style="margin-top: 15px; color: #666; font-size: 14px;">Es divertido, es romántico, y es nuestro. 💕</p>
-            </div>
-
-            <div class="progress-bar">
-                <div class="progress-dot active"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
+                <div class="card-title">👋 Bienvenidos</div>
+                <p>Este es un acuerdo entre dos personas que deciden iniciar una relación de pololeo.</p>
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">📸 La firma se realiza con una foto juntos como prueba del momento.</p>
             </div>
 
             <button class="btn" onclick="nextScreen(2)">Comenzar ✨</button>
         </div>
 
-        <!-- Pantalla 2: Nombres -->
+        <!-- Pantalla 2: Datos -->
         <div class="screen" id="screen-2">
             <div class="heart">📝</div>
             <h1>¿Quiénes firman?</h1>
@@ -354,348 +279,118 @@
 
             <div class="card">
                 <div class="card-title">💁 Persona 1</div>
-                <input type="text" id="name1" placeholder="Tu nombre" value="">
+                <input type="text" id="name1" placeholder="Tu nombre">
             </div>
 
             <div class="card">
                 <div class="card-title">💁‍♀️ Persona 2</div>
-                <input type="text" id="name2" placeholder="Nombre de tu pareja" value="">
+                <input type="text" id="name2" placeholder="Nombre de tu pareja">
             </div>
-
-            <div class="progress-bar">
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-            </div>
-
-            <button class="btn" onclick="saveNames()">Continuar 💫</button>
-        </div>
-
-        <!-- Pantalla 3: Condiciones -->
-        <div class="screen" id="screen-3">
-            <div class="heart">📋</div>
-            <h1>Condiciones del Acuerdo</h1>
-            <p class="subtitle">Escribe las reglas de nuestro pololeo</p>
 
             <div class="card">
-                <div class="card-title">✍️ Cláusulas</div>
-                <textarea id="terms" placeholder="Ejemplos:
+                <div class="card-title">✍️ Cláusulas del acuerdo</div>
+                <textarea id="terms" placeholder="Ejemplo:
 • Nos vemos los fines de semana
 • Nos llamamos antes de dormir
 • No nos vamos a dormir enojados
+• Respetamos nuestro espacio
 • ..."></textarea>
-                <p style="margin-top: 10px; font-size: 13px; color: #666;">Sé creativo/a. Esto es lo que hace especial nuestra relación.</p>
             </div>
 
-            <div class="progress-bar">
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot"></div>
-            </div>
-
-            <button class="btn" onclick="saveTerms()">Continuar 🎯</button>
+            <button class="btn" onclick="saveData()">Continuar 📸</button>
         </div>
 
-        <!-- Pantalla 4: Método de firma -->
-        <div class="screen" id="screen-4">
-            <div class="heart">🔐</div>
-            <h1>¿Cómo quieres firmar?</h1>
-            <p class="subtitle">Elige tu método de firma biométrica</p>
-
-            <div class="option-card" onclick="selectMethod('signature')">
-                <div class="option-icon">✍️</div>
-                <div class="option-title">Firma con el dedo</div>
-                <div class="option-desc">Dibuja tu firma en la pantalla</div>
-            </div>
-
-            <div class="option-card" onclick="selectMethod('pin')">
-                <div class="option-icon">🔢</div>
-                <div class="option-title">Código PIN</div>
-                <div class="option-desc">Un número secreto entre ustedes</div>
-            </div>
-
-            <div class="option-card" onclick="selectMethod('photo')">
-                <div class="option-icon">📸</div>
-                <div class="option-title">Foto juntos</div>
-                <div class="option-desc">Un selfie como prueba</div>
-            </div>
-
-            <div class="option-card" onclick="selectMethod('location')">
-                <div class="option-icon">📍</div>
-                <div class="option-title">Ubicación GPS</div>
-                <div class="option-desc">Firmamos en este lugar especial</div>
-            </div>
-
-            <div class="progress-bar">
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-            </div>
-        </div>
-
-        <!-- Pantalla 5: Firma con dedo -->
-        <div class="screen" id="screen-signature">
-            <div class="heart">✍️</div>
-            <h1>Firma aquí</h1>
-            <p class="subtitle">Dibuja tu firma con el dedo</p>
-
-            <div class="card">
-                <canvas id="signatureCanvas" class="signature-pad" width="400" height="200"></canvas>
-                <button class="btn btn-secondary" onclick="clearSignature()" style="margin-top: 10px;">Borrar</button>
-            </div>
-
-            <button class="btn" onclick="saveSignature()">Confirmar firma ✅</button>
-        </div>
-
-        <!-- Pantalla 6: PIN -->
-        <div class="screen" id="screen-pin">
-            <div class="heart">🔢</div>
-            <h1>Código secreto</h1>
-            <p class="subtitle">Ingresa un PIN de 4 dígitos</p>
-
-            <div class="card">
-                <div class="pin-display" id="pinDisplay">
-                    <div class="pin-dot"></div>
-                    <div class="pin-dot"></div>
-                    <div class="pin-dot"></div>
-                    <div class="pin-dot"></div>
-                </div>
-
-                <div class="pin-pad">
-                    <button class="pin-btn" onclick="addPin(1)">1</button>
-                    <button class="pin-btn" onclick="addPin(2)">2</button>
-                    <button class="pin-btn" onclick="addPin(3)">3</button>
-                    <button class="pin-btn" onclick="addPin(4)">4</button>
-                    <button class="pin-btn" onclick="addPin(5)">5</button>
-                    <button class="pin-btn" onclick="addPin(6)">6</button>
-                    <button class="pin-btn" onclick="addPin(7)">7</button>
-                    <button class="pin-btn" onclick="addPin(8)">8</button>
-                    <button class="pin-btn" onclick="addPin(9)">9</button>
-                    <button class="pin-btn" onclick="clearPin()">⌫</button>
-                    <button class="pin-btn" onclick="addPin(0)">0</button>
-                    <button class="pin-btn" onclick="confirmPin()">✓</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pantalla 7: Foto -->
-        <div class="screen" id="screen-photo">
+        <!-- Pantalla 3: Foto -->
+        <div class="screen" id="screen-3">
             <div class="heart">📸</div>
-            <h1>Captura el momento</h1>
-            <p class="subtitle">Una foto juntos como recuerdo</p>
+            <h1>Firma con Foto</h1>
+            <p class="subtitle">Un selfie juntos como prueba</p>
 
             <div class="card">
                 <video id="video" class="video-preview" autoplay playsinline></video>
                 <canvas id="photoCanvas" class="hidden"></canvas>
                 <img id="photoPreview" class="photo-preview hidden">
-                <button class="btn" id="captureBtn" onclick="capturePhoto()">📷 Tomar foto</button>
-                <button class="btn hidden" id="retakeBtn" onclick="retakePhoto()">🔄 Tomar otra</button>
-            </div>
-
-            <button class="btn" id="confirmPhotoBtn" onclick="savePhoto()" disabled>Confirmar ✅</button>
-        </div>
-
-        <!-- Pantalla 8: Ubicación -->
-        <div class="screen" id="screen-location">
-            <div class="heart">📍</div>
-            <h1>Lugar especial</h1>
-            <p class="subtitle">Firmamos aquí</p>
-
-            <div class="card">
-                <div id="locationInfo" style="text-align: center; padding: 40px 20px;">
-                    <div style="font-size: 60px; margin-bottom: 20px;">🗺️</div>
-                    <p>Obteniendo tu ubicación...</p>
-                    <button class="btn" onclick="getLocation()" style="margin-top: 20px;">Obtener ubicación</button>
-                </div>
-                <div id="locationResult" class="hidden">
-                    <p style="font-size: 18px; color: #764ba2; font-weight: 600;">📍 Ubicación guardada</p>
-                    <p id="locationText" style="margin-top: 10px; color: #666;"></p>
-                    <p style="margin-top: 15px; font-size: 14px; color: #999;">Este es el lugar donde firmaron su acuerdo 💕</p>
-                </div>
-            </div>
-
-            <button class="btn" id="confirmLocationBtn" onclick="saveLocation()" disabled>Confirmar ✅</button>
-        </div>
-
-        <!-- Pantalla 9: Certificado -->
-        <div class="screen" id="screen-certificate">
-            <div class="heart">🏆</div>
-            <h1>¡Acuerdo Firmado!</h1>
-            <p class="subtitle">Oficialmente pololeos</p>
-
-            <div class="certificate">
-                <h2>📜 CERTIFICADO DE POLOLEO</h2>
-                <p style="color: #666; font-size: 14px;">Se certifica que</p>
-                <p style="font-size: 22px; font-weight: bold; color: #764ba2; margin: 10px 0;">
-                    <span id="certName1">Persona 1</span> 💕 <span id="certName2">Persona 2</span>
-                </p>
-                <p style="color: #666; font-size: 14px;">han acordado iniciar una relación de pololeo</p>
                 
-                <div class="terms-box" id="certTerms">
+                <button class="btn" id="captureBtn" onclick="capturePhoto()">📷 Tomar foto</button>
+                <button class="btn btn-secondary hidden" id="retakeBtn" onclick="retakePhoto()">🔄 Tomar otra</button>
+            </div>
+
+            <button class="btn" id="confirmBtn" onclick="showCertificate()" disabled>
+                Ver Certificado ✅
+            </button>
+        </div>
+
+        <!-- Pantalla 4: Certificado -->
+        <div class="screen" id="screen-4">
+            <div id="certificate-content">
+                <div class="cert-header">🏆 CERTIFICADO DE POLOLEO</div>
+                <div class="cert-subtitle">Documento Oficial de Compromiso</div>
+                
+                <p style="color: #666;">Se certifica que</p>
+                
+                <div class="cert-names">
+                    <span id="certName1">Persona 1</span>
+                    <span class="cert-divider">💕</span>
+                    <span id="certName2">Persona 2</span>
+                </div>
+                
+                <p style="color: #666;">han acordado iniciar una relación de pololeo<br>con las siguientes condiciones:</p>
+                
+                <div class="cert-terms" id="certTerms">
                     Condiciones del acuerdo...
                 </div>
 
-                <p class="certificate-text">
-                    "El amor no se mira, se siente, y aún más cuando estás al lado de la persona que amas."
-                </p>
+                <div class="cert-photo-container">
+                    <img id="certPhoto" class="cert-photo" src="" alt="Foto de firma">
+                    <div class="cert-photo-label">
+                        📸 Firma biométrica: Captura realizada el <span id="certDatePhoto"></span>
+                    </div>
+                </div>
 
-                <p class="date" id="certDate">Fecha: --/--/----</p>
-                <p style="color: #999; font-size: 12px; margin-top: 10px;">Método de firma: <span id="certMethod">--</span></p>
+                <div class="cert-quote">
+                    "El amor no se mira, se siente, y aún más cuando estás<br>
+                    al lado de la persona que amas."
+                </div>
+
+                <div class="cert-date" id="certDate"></div>
+
+                <div class="cert-footer">
+                    Este certificado fue generado digitalmente<br>
+                    y tiene validez emocional indefinida 💕
+                </div>
             </div>
 
-            <button class="btn" onclick="shareAgreement()">Compartir 📤</button>
-            <button class="btn btn-secondary" onclick="location.reload()">Nuevo acuerdo 🔄</button>
+            <div class="card" style="margin-top: 30px;">
+                <button class="btn" onclick="downloadPDF()">📥 Descargar PDF</button>
+                <button class="btn btn-secondary" onclick="location.reload()">🔄 Crear nuevo acuerdo</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Estado
-        let currentScreen = 1;
+        // Datos del formulario
         let formData = {
             name1: '',
             name2: '',
             terms: '',
-            method: '',
-            signature: null,
-            pin: '',
             photo: null,
-            location: null
+            date: null
         };
 
         // Navegación
         function nextScreen(n) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(`screen-${n}`).classList.add('active');
-            currentScreen = n;
         }
 
-        // Pantalla 2: Nombres
-        function saveNames() {
+        // Guardar datos
+        function saveData() {
             formData.name1 = document.getElementById('name1').value || 'Persona 1';
             formData.name2 = document.getElementById('name2').value || 'Persona 2';
-            nextScreen(3);
-        }
-
-        // Pantalla 3: Condiciones
-        function saveTerms() {
             formData.terms = document.getElementById('terms').value || 'Sin condiciones específicas';
-            nextScreen(4);
-        }
-
-        // Pantalla 4: Selección de método
-        function selectMethod(method) {
-            formData.method = method;
-            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
             
-            setTimeout(() => {
-                if (method === 'signature') nextScreen('signature');
-                else if (method === 'pin') nextScreen('pin');
-                else if (method === 'photo') {
-                    nextScreen('photo');
-                    initCamera();
-                }
-                else if (method === 'location') nextScreen('location');
-            }, 300);
-        }
-
-        // Firma con canvas
-        const canvas = document.getElementById('signatureCanvas');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            ctx.strokeStyle = '#764ba2';
-            ctx.lineWidth = 3;
-            ctx.lineCap = 'round';
-        }
-
-        function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        function startDraw(e) {
-            isDrawing = true;
-            const pos = getPos(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-            e.preventDefault();
-        }
-
-        function draw(e) {
-            if (!isDrawing) return;
-            const pos = getPos(e);
-            ctx.lineTo(pos.x, pos.y);
-            ctx.stroke();
-            e.preventDefault();
-        }
-
-        function endDraw() {
-            isDrawing = false;
-        }
-
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mouseout', endDraw);
-        canvas.addEventListener('touchstart', startDraw);
-        canvas.addEventListener('touchmove', draw);
-        canvas.addEventListener('touchend', endDraw);
-
-        window.addEventListener('load', resizeCanvas);
-        window.addEventListener('resize', resizeCanvas);
-
-        function clearSignature() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function saveSignature() {
-            formData.signature = canvas.toDataURL();
-            showCertificate();
-        }
-
-        // PIN
-        let currentPin = '';
-
-        function addPin(num) {
-            if (currentPin.length < 4) {
-                currentPin += num;
-                updatePinDisplay();
-            }
-        }
-
-        function clearPin() {
-            currentPin = currentPin.slice(0, -1);
-            updatePinDisplay();
-        }
-
-        function updatePinDisplay() {
-            const dots = document.querySelectorAll('.pin-dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('filled', i < currentPin.length);
-            });
-        }
-
-        function confirmPin() {
-            if (currentPin.length === 4) {
-                formData.pin = currentPin;
-                showCertificate();
-            } else {
-                document.querySelector('.pin-display').classList.add('shake');
-                setTimeout(() => document.querySelector('.pin-display').classList.remove('shake'), 500);
-            }
+            nextScreen(3);
+            initCamera();
         }
 
         // Cámara
@@ -709,28 +404,33 @@
                 });
                 document.getElementById('video').srcObject = videoStream;
             } catch (err) {
-                alert('No se pudo acceder a la cámara. Intenta con otro método de firma.');
-                nextScreen(4);
+                alert('No se pudo acceder a la cámara. Asegúrate de dar permisos.');
             }
         }
 
         function capturePhoto() {
             const video = document.getElementById('video');
-            const photoCanvas = document.getElementById('photoCanvas');
-            const photoPreview = document.getElementById('photoPreview');
-            
-            photoCanvas.width = video.videoWidth;
-            photoCanvas.height = video.videoHeight;
-            photoCanvas.getContext('2d').drawImage(video, 0, 0);
-            
-            formData.photo = photoCanvas.toDataURL('image/jpeg');
-            photoPreview.src = formData.photo;
+            const canvas = document.getElementById('photoCanvas');
+            const preview = document.getElementById('photoPreview');
+
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+
+            formData.photo = canvas.toDataURL('image/jpeg', 0.9);
+            formData.date = new Date();
+
+            preview.src = formData.photo;
             
             video.classList.add('hidden');
-            photoPreview.classList.remove('hidden');
+            preview.classList.remove('hidden');
             document.getElementById('captureBtn').classList.add('hidden');
             document.getElementById('retakeBtn').classList.remove('hidden');
-            document.getElementById('confirmPhotoBtn').disabled = false;
+            document.getElementById('confirmBtn').disabled = false;
+
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+            }
         }
 
         function retakePhoto() {
@@ -738,95 +438,65 @@
             document.getElementById('photoPreview').classList.add('hidden');
             document.getElementById('captureBtn').classList.remove('hidden');
             document.getElementById('retakeBtn').classList.add('hidden');
-            document.getElementById('confirmPhotoBtn').disabled = true;
+            document.getElementById('confirmBtn').disabled = true;
+            initCamera();
         }
 
-        function savePhoto() {
-            if (videoStream) {
-                videoStream.getTracks().forEach(track => track.stop());
-            }
-            showCertificate();
-        }
-
-        // Ubicación
-        function getLocation() {
-            if (!navigator.geolocation) {
-                alert('Tu navegador no soporta geolocalización');
-                return;
-            }
-
-            document.getElementById('locationInfo').innerHTML = '<div style="font-size: 40px;">📡</div><p>Buscando satélites...</p>';
-
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    formData.location = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        accuracy: position.coords.accuracy
-                    };
-                    
-                    document.getElementById('locationInfo').classList.add('hidden');
-                    document.getElementById('locationResult').classList.remove('hidden');
-                    document.getElementById('locationText').textContent = 
-                        `Lat: ${formData.location.lat.toFixed(4)}, Lng: ${formData.location.lng.toFixed(4)}`;
-                    document.getElementById('confirmLocationBtn').disabled = false;
-                },
-                (error) => {
-                    document.getElementById('locationInfo').innerHTML = 
-                        '<div style="font-size: 40px;">❌</div><p>No se pudo obtener la ubicación</p><button class="btn" onclick="getLocation()" style="margin-top: 20px;">Reintentar</button>';
-                },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-            );
-        }
-
-        function saveLocation() {
-            showCertificate();
-        }
-
-        // Certificado
+        // Mostrar certificado
         function showCertificate() {
             document.getElementById('certName1').textContent = formData.name1;
             document.getElementById('certName2').textContent = formData.name2;
             document.getElementById('certTerms').textContent = formData.terms;
-            document.getElementById('certDate').textContent = 'Fecha: ' + new Date().toLocaleDateString('es-ES');
+            document.getElementById('certPhoto').src = formData.photo;
+            document.getElementById('certDate').textContent = 'Fecha: ' + formData.date.toLocaleDateString('es-ES', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+            document.getElementById('certDatePhoto').textContent = formData.date.toLocaleString('es-ES');
+
+            nextScreen(4);
+        }
+
+        // Descargar PDF
+        function downloadPDF() {
+            const element = document.getElementById('certificate-content');
             
-            const methods = {
-                'signature': 'Firma digital ✍️',
-                'pin': 'Código PIN 🔢',
-                'photo': 'Fotografía 📸',
-                'location': 'Ubicación GPS 📍'
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: `Acuerdo_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait'
+                }
             };
-            document.getElementById('certMethod').textContent = methods[formData.method] || 'Desconocido';
 
-            // Guardar en localStorage
-            localStorage.setItem('acuerdoPololeo', JSON.stringify(formData));
+            // Mostrar mensaje de carga
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Generando PDF...';
+            btn.disabled = true;
 
-            nextScreen('certificate');
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }).catch(err => {
+                console.error(err);
+                alert('Error generando PDF. Intenta de nuevo.');
+                btn.textContent = originalText;
+                btn.disabled = false;
+            });
         }
 
-        // Compartir
-        function shareAgreement() {
-            const text = `¡${formData.name1} y ${formData.name2} han firmado su Acuerdo de Pololeo! 💕\n\nFecha: ${new Date().toLocaleDateString('es-ES')}\nMétodo: ${formData.method}`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Acuerdo de Pololeo 💕',
-                    text: text,
-                    url: window.location.href
-                });
-            } else {
-                // Fallback para WhatsApp
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
-                window.open(whatsappUrl, '_blank');
-            }
-        }
-
-        // Cargar datos guardados si existen
-        window.addEventListener('load', () => {
-            const saved = localStorage.getItem('acuerdoPololeo');
-            if (saved) {
-                formData = JSON.parse(saved);
-                // Opcional: mostrar botón para ver acuerdo anterior
+        // Guardar en localStorage
+        window.addEventListener('beforeunload', () => {
+            if (formData.photo) {
+                localStorage.setItem('acuerdoPololeo', JSON.stringify(formData));
             }
         });
     </script>
