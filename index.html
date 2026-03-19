@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Acuerdo de Pololeo 💕</title>
+    <title>Contrato de Pololeo 💕</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
@@ -154,139 +154,157 @@
 
         .hidden { display: none !important; }
 
-        /* CERTIFICADO HORIZONTAL OPTIMIZADO */
-        #certificate-content {
-            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
-            border: 3px solid #d4af37;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            width: 297mm; /* Ancho A4 horizontal */
-            height: 210mm; /* Alto A4 horizontal */
+        /* CONTRATO ESTILO LEGAL */
+        #contract-content {
+            background: white;
+            border: 2px solid #333;
+            padding: 30px 40px;
+            width: 210mm;
+            min-height: 297mm;
             margin: 0 auto;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            overflow: hidden;
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+            text-align: justify;
+            line-height: 1.6;
             page-break-inside: avoid;
         }
 
-        .cert-left {
-            flex: 1.2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
+        .contract-header {
+            text-align: center;
+            border-bottom: 3px double #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        .cert-right {
-            flex: 0.8;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            border-left: 2px solid #d4af37;
+        .contract-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .contract-subtitle {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .contract-section {
+            margin: 25px 0;
+        }
+
+        .contract-heading {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .contract-text {
+            text-indent: 30px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .contract-clauses {
+            margin: 20px 0;
             padding-left: 20px;
         }
 
-        .cert-header {
-            font-size: 26px;
-            color: #d4af37;
-            font-weight: bold;
-            margin-bottom: 5px;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 8px;
-        }
-
-        .cert-subtitle {
-            color: #666;
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-
-        .cert-intro {
-            color: #666;
+        .contract-clause {
+            margin: 15px 0;
             font-size: 13px;
-            margin: 8px 0;
+            text-align: justify;
         }
 
-        .cert-names {
-            font-size: 22px;
+        .clause-number {
             font-weight: bold;
-            color: #764ba2;
+            margin-right: 10px;
+        }
+
+        .contract-parties {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .party-name {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            display: inline-block;
+            padding: 0 20px 5px 20px;
             margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
-        .cert-terms-label {
-            color: #764ba2;
-            font-weight: 600;
-            font-size: 12px;
-            margin: 10px 0 5px 0;
-        }
-
-        .cert-terms {
-            background: #f9f9f9;
-            border-left: 3px solid #764ba2;
-            padding: 10px 12px;
-            margin: 5px 0;
-            text-align: left;
-            font-style: italic;
-            line-height: 1.3;
+        .party-label {
             font-size: 11px;
-            max-height: 80px;
-            overflow-y: auto;
+            color: #666;
+            text-transform: uppercase;
+            margin-top: 5px;
         }
 
-        .cert-photo-container {
+        .contract-photo-section {
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid #999;
             padding: 15px;
-            background: white;
-            border-radius: 12px;
-            border: 2px dashed #764ba2;
-            margin: 10px 0;
+            background: #fafafa;
         }
 
-        .cert-photo {
-            max-width: 220px;
-            max-height: 160px;
+        .contract-photo {
+            max-width: 250px;
+            max-height: 180px;
             object-fit: contain;
-            border-radius: 8px;
+            border: 1px solid #ccc;
         }
 
-        .cert-photo-label {
+        .photo-caption {
             font-size: 11px;
             color: #666;
-            margin-top: 8px;
-        }
-
-        .cert-quote {
+            margin-top: 10px;
             font-style: italic;
-            color: #555;
-            margin: 12px 0;
-            font-size: 13px;
-            line-height: 1.3;
         }
 
-        .cert-date {
+        .contract-signatures {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .signature-block {
+            flex: 1;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-top: 60px;
+            padding-top: 10px;
+            font-size: 12px;
+        }
+
+        .contract-footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .contract-date {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 13px;
+        }
+
+        .heart-icon {
             color: #764ba2;
-            font-weight: 600;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-
-        .cert-footer {
-            margin-top: 10px;
-            padding-top: 8px;
-            border-top: 1px solid #d4af37;
-            font-size: 9px;
-            color: #999;
+            font-size: 20px;
         }
 
         /* Ajustes para móviles */
@@ -295,24 +313,12 @@
             h1 { font-size: 22px; }
             .card { padding: 20px; }
             
-            #certificate-content {
-                flex-direction: column;
-                width: 100%;
-                height: auto;
-                padding: 15px;
-            }
-            .cert-right {
-                border-left: none;
-                border-top: 2px solid #d4af37;
-                padding-left: 0;
-                padding-top: 15px;
+            #contract-content {
+                padding: 20px;
                 width: 100%;
             }
-            .cert-left {
-                width: 100%;
-            }
-            .cert-header { font-size: 20px; }
-            .cert-names { font-size: 18px; flex-direction: column; }
+            .contract-title { font-size: 22px; }
+            .contract-signatures { flex-direction: column; gap: 20px; }
         }
 
         @media print {
@@ -320,18 +326,12 @@
                 background: white !important; 
                 padding: 0 !important;
             }
-            #certificate-content {
-                width: 297mm !important;
-                height: 210mm !important;
+            #contract-content {
+                width: 210mm !important;
+                min-height: 297mm !important;
                 margin: 0 !important;
+                border: 2px solid #333 !important;
                 page-break-after: avoid;
-                flex-direction: row !important;
-            }
-            .cert-right {
-                border-top: none !important;
-                border-left: 2px solid #d4af37 !important;
-                padding-top: 0 !important;
-                padding-left: 20px !important;
             }
         }
     </style>
@@ -341,14 +341,14 @@
         <!-- Pantalla 1: Bienvenida -->
         <div class="screen active" id="screen-1">
             <div class="heart">💕</div>
-            <h1>Acuerdo de Pololeo</h1>
-            <p class="subtitle">Un compromiso especial con foto de prueba</p>
+            <h1>Contrato de Pololeo</h1>
+            <p class="subtitle">Un acuerdo formal para nuestra relación</p>
             
             <div class="card">
-                <div class="card-title">👋 Bienvenidos</div>
-                <p>Este es un acuerdo entre dos personas que deciden iniciar una relación de pololeo.</p>
+                <div class="card-title">📜 Bienvenidos</div>
+                <p>Este documento establece los términos y condiciones de nuestra relación de pololeo.</p>
                 <p style="margin-top: 15px; color: #666; font-size: 14px;">
-                    📸 La firma se realiza con una foto juntos como prueba del momento.
+                    📸 La firma se realiza con una foto juntos como constancia del acuerdo.
                 </p>
             </div>
 
@@ -358,26 +358,26 @@
         <!-- Pantalla 2: Datos -->
         <div class="screen" id="screen-2">
             <div class="heart">📝</div>
-            <h1>¿Quiénes firman?</h1>
-            <p class="subtitle">Los protagonistas de esta historia</p>
+            <h1>Partes Contratantes</h1>
+            <p class="subtitle">Los protagonistas de este acuerdo</p>
 
             <div class="card">
-                <div class="card-title">💁 Persona 1</div>
-                <input type="text" id="name1" placeholder="Tu nombre">
+                <div class="card-title">💁 PARTE A (Pololo/a 1)</div>
+                <input type="text" id="name1" placeholder="Nombre completo">
             </div>
 
             <div class="card">
-                <div class="card-title">💁‍♀️ Persona 2</div>
-                <input type="text" id="name2" placeholder="Nombre de tu pareja">
+                <div class="card-title">💁‍♀️ PARTE B (Pololo/a 2)</div>
+                <input type="text" id="name2" placeholder="Nombre completo">
             </div>
 
             <div class="card">
-                <div class="card-title">✍️ Cláusulas del acuerdo</div>
+                <div class="card-title">📋 Cláusulas y Condiciones</div>
                 <textarea id="terms" placeholder="Ejemplo:
-• Nos vemos los fines de semana
-• Nos llamamos antes de dormir
-• No nos vamos a dormir enojados
-• Respetamos nuestro espacio
+• Se acuerda verlos los fines de semana
+• Se comprometen a comunicarse diariamente
+• Se establece el respeto mutuo como base fundamental
+• Se acuerda no dormir enojados
 • ..."></textarea>
             </div>
 
@@ -387,8 +387,8 @@
         <!-- Pantalla 3: Foto -->
         <div class="screen" id="screen-3">
             <div class="heart">📸</div>
-            <h1>Firma con Foto</h1>
-            <p class="subtitle">Un selfie juntos como prueba</p>
+            <h1>Constancia Fotográfica</h1>
+            <p class="subtitle">Un selfie juntos como prueba del acuerdo</p>
 
             <div class="card">
                 <video id="video" class="video-preview" autoplay playsinline></video>
@@ -399,64 +399,141 @@
                 <button class="btn btn-secondary hidden" id="retakeBtn" onclick="retakePhoto()">🔄 Tomar otra</button>
             </div>
 
-            <button class="btn" id="confirmBtn" onclick="showCertificate()" disabled>
-                Ver Certificado ✅
+            <button class="btn" id="confirmBtn" onclick="showContract()" disabled>
+                Ver Contrato ✅
             </button>
         </div>
 
-        <!-- Pantalla 4: Certificado Horizontal -->
+        <!-- Pantalla 4: Contrato Legal -->
         <div class="screen" id="screen-4">
-            <div id="certificate-content">
-                <!-- Lado Izquierdo: Texto -->
-                <div class="cert-left">
-                    <div class="cert-header">🏆 CERTIFICADO DE POLOLEO</div>
-                    <div class="cert-subtitle">Documento Oficial de Compromiso</div>
-                    
-                    <div class="cert-intro">Se certifica que</div>
-                    
-                    <div class="cert-names">
-                        <span id="certName1">Persona 1</span>
-                        <span>💕</span>
-                        <span id="certName2">Persona 2</span>
+            <div id="contract-content">
+                <div class="contract-header">
+                    <div class="contract-title">
+                        📜 CONTRATO DE POLOLEO
                     </div>
-                    
-                    <div class="cert-intro">han acordado iniciar una relación de pololeo con las siguientes condiciones:</div>
-                    
-                    <div class="cert-terms" id="certTerms">
-                        Condiciones del acuerdo...
-                    </div>
-
-                    <div class="cert-quote">
-                        "El amor no se mira, se siente."
-                    </div>
-
-                    <div class="cert-date" id="certDate"></div>
-
-                    <div class="cert-footer">
-                        Certificado digital con validez emocional indefinida 💕
+                    <div class="contract-subtitle">
+                        Documento de Compromiso Afectivo y Relacional
                     </div>
                 </div>
 
-                <!-- Lado Derecho: Foto -->
-                <div class="cert-right">
-                    <div style="font-size: 16px; color: #764ba2; font-weight: 600; margin-bottom: 15px;">
-                        📸 FIRMA DIGITAL
+                <div class="contract-section">
+                    <div class="contract-heading">I. PARTES CONTRATANTES</div>
+                    
+                    <div class="contract-text">
+                        En la ciudad de <strong>____________________</strong>, a los <strong><span id="contractDay">__</span></strong> días del mes de <strong><span id="contractMonth">__________</span></strong> del año <strong><span id="contractYear">____</span></strong>, comparecen:
+                    </div>
+
+                    <div class="contract-parties">
+                        <div>
+                            <div class="party-name" id="contractName1">PARTE A</div>
+                            <div class="party-label">En adelante "EL/LA POLLO/A 1"</div>
+                        </div>
+
+                        <div style="margin: 20px 0; font-size: 24px;">Y</div>
+
+                        <div>
+                            <div class="party-name" id="contractName2">PARTE B</div>
+                            <div class="party-label">En adelante "EL/LA POLLO/A 2"</div>
+                        </div>
+                    </div>
+
+                    <div class="contract-text">
+                        Quienes, en adelante denominados conjuntamente como "LAS PARTES" o "LOS POLOS", se reconocen mutuamente capacidad legal para contratar y obligarse, y al tenor de las siguientes:
+                    </div>
+                </div>
+
+                <div class="contract-section">
+                    <div class="contract-heading">II. ANTECEDENTES</div>
+                    
+                    <div class="contract-text">
+                        <strong>2.1.</strong> Que LAS PARTES han decidido iniciar una relación de pololeo, entendida como una unión afectiva basada en el cariño, respeto mutuo y el deseo de compartir momentos juntos.
                     </div>
                     
-                    <div class="cert-photo-container">
-                        <img id="certPhoto" class="cert-photo" src="" alt="Foto de firma">
+                    <div class="contract-text">
+                        <strong>2.2.</strong> Que LAS PARTES desean establecer las bases y condiciones de su relación, con el fin de promover una convivencia armoniosa y el bienestar emocional de ambos.
                     </div>
                     
-                    <div class="cert-photo-label">
-                        Captura realizada el<br>
-                        <span id="certDatePhoto"></span>
+                    <div class="contract-text">
+                        <strong>2.3.></strong> Que LAS PARTES reconocen que el amor y el respeto son los pilares fundamentales de toda relación sana y duradera.
                     </div>
+                </div>
+
+                <div class="contract-section">
+                    <div class="contract-heading">III. CLÁUSULAS</div>
+                    
+                    <div class="contract-clauses" id="contractClauses">
+                        <!-- Se llenan dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="contract-section">
+                    <div class="contract-heading">IV. DISPOSICIONES GENERALES</div>
+                    
+                    <div class="contract-clause">
+                        <span class="clause-number">4.1</span>
+                        El presente contrato tiene carácter de compromiso afectivo y no constituye un vínculo legal formal ante autoridades civiles, sino un acuerdo de buena fe entre LAS PARTES.
+                    </div>
+                    
+                    <div class="contract-clause">
+                        <span class="clause-number">4.2</span>
+                        Cualquier modificación a las cláusulas aquí establecidas deberá ser acordada mutuamente por LAS PARTES, preferentemente de manera verbal y con una sonrisa.
+                    </div>
+                    
+                    <div class="contract-clause">
+                        <span class="clause-number">4.3</span>
+                        En caso de discrepancias, LAS PARTES se comprometen a resolver sus diferencias mediante el diálogo, la empatía y, de ser necesario, la entrega de chocolates o abrazos.
+                    </div>
+                    
+                    <div class="contract-clause">
+                        <span class="clause-number">4.4</span>
+                        La duración del presente contrato será indefinida, sujeta a la voluntad mutua de LAS PARTES y al principio de "lo que dure, dure; y lo que no, nos hizo felices por un tiempo".
+                    </div>
+                </div>
+
+                <div class="contract-photo-section">
+                    <div style="font-weight: bold; margin-bottom: 10px; font-size: 12px;">
+                        CONSTANCIA FOTOGRÁFICA DEL ACUERDO
+                    </div>
+                    <img id="contractPhoto" class="contract-photo" src="" alt="Constancia fotográfica">
+                    <div class="photo-caption">
+                        Fotografía tomada el <span id="contractPhotoDate"></span> como evidencia del acuerdo mutuo entre LAS PARTES.
+                    </div>
+                </div>
+
+                <div class="contract-section">
+                    <div class="contract-heading">V. FIRMAS</div>
+                    
+                    <div class="contract-text" style="text-align: center; margin-bottom: 30px;">
+                        En señal de conformidad y afecto mutuo, LAS PARTES firman el presente documento:
+                    </div>
+
+                    <div class="contract-signatures">
+                        <div class="signature-block">
+                            <div class="signature-line">
+                                <strong id="sigName1">PARTE A</strong><br>
+                                EL/LA POLLO/A 1
+                            </div>
+                        </div>
+
+                        <div class="signature-block">
+                            <div class="signature-line">
+                                <strong id="sigName2">PARTE B</strong><br>
+                                EL/LA POLLO/A 2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contract-footer">
+                    <span class="heart-icon">💕</span><br>
+                    "El amor no se mira, se siente, y aún más cuando estás al lado de la persona que amas."<br><br>
+                    Documento generado digitalmente - Tiene validez emocional indefinida
                 </div>
             </div>
 
             <div class="card" style="margin-top: 30px;">
-                <button class="btn" onclick="downloadPDF()">📥 Descargar PDF</button>
-                <button class="btn btn-secondary" onclick="location.reload()">🔄 Crear nuevo acuerdo</button>
+                <button class="btn" onclick="downloadPDF()">📥 Descargar Contrato PDF</button>
+                <button class="btn btn-secondary" onclick="location.reload()">🔄 Crear nuevo contrato</button>
             </div>
         </div>
     </div>
@@ -530,25 +607,54 @@
             initCamera();
         }
 
-        function showCertificate() {
-            document.getElementById('certName1').textContent = formData.name1;
-            document.getElementById('certName2').textContent = formData.name2;
-            document.getElementById('certTerms').textContent = formData.terms;
-            document.getElementById('certPhoto').src = formData.photo;
-            document.getElementById('certDate').textContent = formData.date.toLocaleDateString('es-ES', {
-                year: 'numeric', month: 'long', day: 'numeric'
+        function showContract() {
+            // Fecha
+            const date = formData.date;
+            document.getElementById('contractDay').textContent = date.getDate();
+            document.getElementById('contractMonth').textContent = date.toLocaleDateString('es-ES', { month: 'long' });
+            document.getElementById('contractYear').textContent = date.getFullYear();
+            
+            // Nombres
+            document.getElementById('contractName1').textContent = formData.name1.toUpperCase();
+            document.getElementById('contractName2').textContent = formData.name2.toUpperCase();
+            document.getElementById('sigName1').textContent = formData.name1.toUpperCase();
+            document.getElementById('sigName2').textContent = formData.name2.toUpperCase();
+            
+            // Cláusulas
+            const clausesContainer = document.getElementById('contractClauses');
+            clausesContainer.innerHTML = '';
+            
+            const termsList = formData.terms.split('\n').filter(t => t.trim());
+            if (termsList.length === 0) {
+                termsList.push('Se establece una relación de pololeo basada en el afecto, respeto y comunicación mutua.');
+            }
+            
+            termsList.forEach((term, index) => {
+                const cleanTerm = term.replace(/^[-•*]\s*/, '').trim();
+                if (cleanTerm) {
+                    const clause = document.createElement('div');
+                    clause.className = 'contract-clause';
+                    clause.innerHTML = `
+                        <span class="clause-number">3.${index + 1}</span>
+                        ${cleanTerm}
+                    `;
+                    clausesContainer.appendChild(clause);
+                }
             });
-            document.getElementById('certDatePhoto').textContent = formData.date.toLocaleString('es-ES');
+            
+            // Foto
+            document.getElementById('contractPhoto').src = formData.photo;
+            document.getElementById('contractPhotoDate').textContent = date.toLocaleString('es-ES');
+            
             nextScreen(4);
         }
 
-        // PDF HORIZONTAL
         function downloadPDF() {
-            const element = document.getElementById('certificate-content');
+            const element = document.getElementById('contract-content');
             
             const opt = {
-                margin: [5, 5, 5, 5],
-                filename: `Acuerdo_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
+                margin: [10, 10, 10, 10],
+                filename: `Contrato_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
                 image: { 
                     type: 'jpeg', 
                     quality: 0.98 
@@ -558,15 +664,12 @@
                     useCORS: true,
                     allowTaint: true,
                     scrollY: 0,
-                    scrollX: 0,
-                    windowWidth: 297 * 3.78, // 297mm en px aprox
-                    windowHeight: 210 * 3.78
+                    scrollX: 0
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'landscape', // <-- HORIZONTAL
-                    putOnlyUsedFonts: true
+                    orientation: 'portrait'
                 }
             };
 
@@ -588,7 +691,7 @@
 
         window.addEventListener('beforeunload', () => {
             if (formData.photo) {
-                localStorage.setItem('acuerdoPololeo', JSON.stringify(formData));
+                localStorage.setItem('contratoPololeo', JSON.stringify(formData));
             }
         });
     </script>
