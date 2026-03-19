@@ -158,15 +158,14 @@
         #contract-content {
             background: white;
             border: 2px solid #333;
-            padding: 20px 25px;
-            width: 100%;
-            max-width: 180mm;
+            padding: 15mm 15mm;
+            width: 170mm;
             min-height: 250mm;
             margin: 0 auto;
             box-sizing: border-box;
             font-family: 'Times New Roman', Times, serif;
             color: #000;
-            text-align: justify;
+            text-align: left;
             line-height: 1.5;
             overflow: hidden;
             word-wrap: break-word;
@@ -338,12 +337,15 @@
                 width: 170mm !important;
                 max-width: 170mm !important;
                 min-height: 250mm !important;
-                margin: 10mm auto !important;
-                padding: 15mm 20mm !important;
+                margin: 0 auto !important;
+                padding: 15mm !important;
                 border: 2px solid #333 !important;
                 page-break-after: avoid;
                 box-sizing: border-box !important;
                 overflow: hidden !important;
+                position: relative !important;
+                left: 0 !important;
+                right: 0 !important;
             }
             .btn, .card:not(#contract-content) { 
                 display: none !important; 
@@ -668,11 +670,11 @@
             const element = document.getElementById('contract-content');
             
             // Forzar estilos temporales para el PDF
-            const originalWidth = element.style.width;
-            element.style.width = '170mm';
+            const originalStyle = element.getAttribute('style') || '';
+            element.setAttribute('style', 'width: 170mm !important; margin: 0 auto !important; padding: 15mm !important; position: relative !important; left: 0 !important;');
             
             const opt = {
-                margin: [5, 5, 5, 5],
+                margin: 0,
                 filename: `Contrato_Pololeo_${formData.name1}_${formData.name2}.pdf`.replace(/\s+/g, '_'),
                 image: { 
                     type: 'jpeg', 
@@ -684,7 +686,10 @@
                     allowTaint: true,
                     scrollY: 0,
                     scrollX: 0,
-                    width: 642 // 170mm en px aprox
+                    x: 0,
+                    y: 0,
+                    width: 642,
+                    windowWidth: 642
                 },
                 jsPDF: { 
                     unit: 'mm', 
@@ -699,11 +704,11 @@
             btn.disabled = true;
 
             html2pdf().set(opt).from(element).save().then(() => {
-                element.style.width = originalWidth;
+                element.setAttribute('style', originalStyle);
                 btn.textContent = originalText;
                 btn.disabled = false;
             }).catch(err => {
-                element.style.width = originalWidth;
+                element.setAttribute('style', originalStyle);
                 console.error(err);
                 alert('Error generando PDF. Intenta de nuevo.');
                 btn.textContent = originalText;
