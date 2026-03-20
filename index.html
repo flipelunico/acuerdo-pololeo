@@ -399,6 +399,11 @@
             </div>
 
             <div class="card">
+                <div class="card-title">📍 Ciudad</div>
+                <input type="text" id="city" placeholder="Ciudad donde se firma el contrato">
+            </div>
+
+            <div class="card">
                 <div class="card-title">📋 Cláusulas y Condiciones</div>
                 <textarea id="terms" placeholder="Ejemplo:
 • Se acuerda verlos los fines de semana
@@ -408,11 +413,25 @@
 • ..."></textarea>
             </div>
 
-            <button class="btn" onclick="saveData()">Continuar 📸</button>
+            <button class="btn" onclick="previewContract()">Ver vista previa ✨</button>
         </div>
 
-        <!-- Pantalla 3: Foto -->
+        <!-- Pantalla 3: Vista previa del contrato -->
         <div class="screen" id="screen-3">
+            <div class="heart">📜</div>
+            <h1>Vista Previa del Contrato</h1>
+            <p class="subtitle">Revisa el documento antes de firmar</p>
+
+            <div id="preview-content" style="background: white; border-radius: 20px; padding: 20px; margin: 15px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.2); max-height: 60vh; overflow-y: auto;">
+                <!-- Se llenará dinámicamente -->
+            </div>
+
+            <button class="btn btn-secondary" onclick="nextScreen(2)">✏️ Editar datos</button>
+            <button class="btn" onclick="goToSign()">Firmar con foto 📸</button>
+        </div>
+
+        <!-- Pantalla 4: Foto -->
+        <div class="screen" id="screen-4">
             <div class="heart">📸</div>
             <h1>Constancia Fotográfica</h1>
             <p class="subtitle">Un selfie juntos como prueba del acuerdo</p>
@@ -427,12 +446,12 @@
             </div>
 
             <button class="btn" id="confirmBtn" onclick="showContract()" disabled>
-                Ver Contrato ✅
+                Generar Contrato Final ✅
             </button>
         </div>
 
-        <!-- Pantalla 4: Contrato Legal -->
-        <div class="screen" id="screen-4">
+        <!-- Pantalla 5: Contrato Final -->
+        <div class="screen" id="screen-5">
             <div id="contract-content">
                 <div class="contract-header">
                     <div class="contract-title">
@@ -447,7 +466,7 @@
                     <div class="contract-heading">I. PARTES CONTRATANTES</div>
                     
                     <div class="contract-text">
-                        En la ciudad de <strong>____________________</strong>, a los <strong><span id="contractDay">__</span></strong> días del mes de <strong><span id="contractMonth">__________</span></strong> del año <strong><span id="contractYear">____</span></strong>, comparecen:
+                        En la ciudad de <strong id="contractCity">____________________</strong>, a los <strong><span id="contractDay">__</span></strong> días del mes de <strong><span id="contractMonth">__________</span></strong> del año <strong><span id="contractYear">____</span></strong>, comparecen:
                     </div>
 
                     <div class="contract-parties">
@@ -545,6 +564,7 @@
         let formData = {
             name1: '',
             name2: '',
+            city: '',
             terms: '',
             photo: null,
             date: null
@@ -555,11 +575,64 @@
             document.getElementById(`screen-${n}`).classList.add('active');
         }
 
-        function saveData() {
+        function previewContract() {
             formData.name1 = document.getElementById('name1').value || 'Persona 1';
             formData.name2 = document.getElementById('name2').value || 'Persona 2';
+            formData.city = document.getElementById('city').value || '____________________';
             formData.terms = document.getElementById('terms').value || 'Sin condiciones específicas';
+            
+            generatePreview();
             nextScreen(3);
+        }
+
+        function generatePreview() {
+            const date = new Date();
+            const previewContent = document.getElementById('preview-content');
+            
+            // Generar cláusulas
+            let clausesHTML = '';
+            const termsList = formData.terms.split('\n').filter(t => t.trim());
+            if (termsList.length === 0) {
+                termsList.push('Se establece una relación de pololeo basada en el afecto, respeto y comunicación mutua.');
+            }
+            
+            termsList.forEach((term, index) => {
+                const cleanTerm = term.replace(/^[-•*]\s*/, '').trim();
+                if (cleanTerm) {
+                    clausesHTML += `<div style="margin: 10px 0; font-size: 13px;"><strong>3.${index + 1}</strong> ${cleanTerm}</div>`;
+                }
+            });
+            
+            previewContent.innerHTML = `
+                <div style="text-align: center; border-bottom: 3px double #333; padding-bottom: 15px; margin-bottom: 15px;">
+                    <div style="font-size: 20px; font-weight: bold;">📜 CONTRATO DE POLOLEO</div>
+                    <div style="font-size: 12px; color: #666; font-style: italic;">Vista previa del documento</div>
+                </div>
+                <div style="font-size: 13px; line-height: 1.6;">
+                    <p style="text-indent: 30px; margin-bottom: 15px;">
+                        En la ciudad de <strong>${formData.city}</strong>, a los <strong>${date.getDate()}</strong> días del mes de <strong>${date.toLocaleDateString('es-ES', { month: 'long' })}</strong> del año <strong>${date.getFullYear()}</strong>, comparecen:
+                    </p>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="font-size: 16px; font-weight: bold; border-bottom: 1px solid #333; display: inline-block; padding: 5px 20px;">${formData.name1.toUpperCase()}</div>
+                        <div style="font-size: 11px; color: #666;">EL/LA POLLO/A 1</div>
+                    </div>
+                    <div style="text-align: center; font-size: 20px; margin: 15px 0;">Y</div>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="font-size: 16px; font-weight: bold; border-bottom: 1px solid #333; display: inline-block; padding: 5px 20px;">${formData.name2.toUpperCase()}</div>
+                        <div style="font-size: 11px; color: #666;">EL/LA POLLO/A 2</div>
+                    </div>
+                    <p style="text-indent: 30px; margin: 15px 0;">En adelante denominados conjuntamente como "LAS PARTES" o "LOS POLOS".</p>
+                    <div style="margin-top: 20px;"><strong>CLÁUSULAS:</strong></div>
+                    ${clausesHTML}
+                    <div style="margin-top: 20px; text-align: center; color: #666; font-size: 11px;">
+                        📸 La firma se realizará con una foto juntos
+                    </div>
+                </div>
+            `;
+        }
+
+        function goToSign() {
+            nextScreen(4);
             initCamera();
         }
 
@@ -616,6 +689,7 @@
             document.getElementById('contractDay').textContent = date.getDate();
             document.getElementById('contractMonth').textContent = date.toLocaleDateString('es-ES', { month: 'long' });
             document.getElementById('contractYear').textContent = date.getFullYear();
+            document.getElementById('contractCity').textContent = formData.city;
             
             // Nombres
             document.getElementById('contractName1').textContent = formData.name1.toUpperCase();
